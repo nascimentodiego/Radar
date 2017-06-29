@@ -43,7 +43,6 @@ public class LoginFragment extends BaseFragment implements LoginContracts.View, 
     private OnLoginFragmentListener mOnLoginFragmentListener;
 
     CallbackManager callbackManager;
-
     LoginButton loginButton;
 
     /**
@@ -137,7 +136,8 @@ public class LoginFragment extends BaseFragment implements LoginContracts.View, 
 
     @Override
     public void onClick(View v) {
-        callMainActivity();
+        // callMainActivity();
+        loginButton.performClick();
     }
 
     @Override
