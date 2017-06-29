@@ -104,7 +104,9 @@ public class MainActivity extends BaseOAuthActivity implements RadarFragment.OnR
     @Override
     protected void onPause() {
         super.onPause();
-        dialog.dismiss();
+        if(dialog != null) {
+            dialog.dismiss();
+        }
     }
 
     @Override
