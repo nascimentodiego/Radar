@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 
 import br.com.dfn.radar.R;
 import br.com.dfn.radar.view.base.activity.BaseActivity;
+import br.com.dfn.radar.view.base.activity.BaseOAuthActivity;
 
 
 public class LoginActivity extends BaseActivity implements LoginFragment.OnLoginFragmentListener {
@@ -34,6 +35,9 @@ public class LoginActivity extends BaseActivity implements LoginFragment.OnLogin
                     .commit();
         }
     }
+
+
+
 
     @Override
     public void onShowProgress() {

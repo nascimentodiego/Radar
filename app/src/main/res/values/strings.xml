@@ -3,4 +3,7 @@
     <string name="title_radar">Radar</string>
     <string name="title_list">Lista</string>
     <string name="title_profile">Perfil</string>
+
+    <string name="facebook_app_id">315245708918459</string>
+    <string name="fb_login_protocol_scheme">fb315245708918459</string>
 </resources>

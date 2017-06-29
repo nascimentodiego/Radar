@@ -29,18 +29,6 @@ public class LoginPresenter implements LoginContracts.Presenter {
     }
 
     @Override
-    public boolean isAccess() {
-        return false;
-    }
-
-    @Override
-    public void checkAccount() {
-        if (isAccess()) {
-            mLoginView.callMainActivity();
-        }
-    }
-
-    @Override
     public void callMainActivity() {
         mLoginView.callMainActivity();
     }

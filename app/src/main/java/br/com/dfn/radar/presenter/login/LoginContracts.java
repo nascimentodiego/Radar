@@ -41,18 +41,6 @@ public class LoginContracts {
         void doLogin();
 
         /**
-         * Is access boolean.
-         *
-         * @return the boolean
-         */
-        boolean isAccess();
-
-        /**
-         * Check account.
-         */
-        void checkAccount();
-
-        /**
          * Call main activity.
          */
         void callMainActivity();

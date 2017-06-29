@@ -1,8 +1,15 @@
 package br.com.dfn.radar.view.base.activity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Debug;
 import android.support.annotation.Nullable;
+import android.util.DebugUtils;
+
+import com.facebook.AccessToken;
+
+import br.com.dfn.radar.view.login.LoginActivity;
 
 /**
  * The type Base o auth activity.
@@ -27,9 +34,10 @@ public class BaseOAuthActivity extends BaseActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*if (!AccessT isAccess()) {
+
+        if (AccessToken.getCurrentAccessToken() == null) {
             logout();
-        }*/
+        }
     }
 
 
@@ -37,9 +45,8 @@ public class BaseOAuthActivity extends BaseActivity {
      * Logout.
      */
     protected void logout() {
-        /*SharedPreferenceManager.getInstance().clear();
         Intent it = new Intent(this, LoginActivity.class);
         startActivity(it);
-        finish();*/
+        finish();
     }
 }
