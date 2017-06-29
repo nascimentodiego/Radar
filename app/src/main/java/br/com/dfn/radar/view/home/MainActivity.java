@@ -104,9 +104,9 @@ public class MainActivity extends BaseOAuthActivity implements RadarFragment.OnR
     @Override
     protected void onPause() {
         super.onPause();
-        if(dialog != null) {
+        /*if (dialog != null && dialog.getDialog().isShowing()) {
             dialog.dismiss();
-        }
+        }*/
     }
 
     @Override
@@ -117,7 +117,7 @@ public class MainActivity extends BaseOAuthActivity implements RadarFragment.OnR
     @Override
     public void onClickDialog(Place place) {
         Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("google.navigation:q=an"+place.getAddress()));
+                Uri.parse("google.navigation:q=an" + place.getAddress()));
         startActivity(intent);
     }
 }

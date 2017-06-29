@@ -3,7 +3,13 @@ package br.com.dfn.radar.presenter.login;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
+import com.facebook.GraphResponse;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import br.com.dfn.radar.model.User;
+import br.com.dfn.radar.model.persistence.SharedPreferenceManager;
 
 
 /**
@@ -25,16 +31,22 @@ public class LoginPresenter implements LoginContracts.Presenter {
     }
 
     @Override
-    public void doLogin() {
-    }
+    public void saveUser(JSONObject object, GraphResponse response) {
+        try {
+            String profilePicUrl = "";
+            String name = object.getString("name");
+            JSONObject data = response.getJSONObject();
+            if (data.has("picture")) {
+                profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
+            }
+            SharedPreferenceManager sharedPreference = SharedPreferenceManager.getInstance();
+            sharedPreference.storeUserName(name);
+            sharedPreference.storeUserUrl(profilePicUrl);
+            mLoginView.showSuccessLogin();
 
-    @Override
-    public void callMainActivity() {
-        mLoginView.callMainActivity();
-    }
-
-    @Override
-    public void onSuccessGetUser(User result) {
-
+        } catch (JSONException e) {
+            e.printStackTrace();
+            mLoginView.showLoginError(e);
+        }
     }
 }

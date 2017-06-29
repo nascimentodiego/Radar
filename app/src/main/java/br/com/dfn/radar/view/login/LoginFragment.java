@@ -65,9 +65,9 @@ public class LoginFragment extends BaseFragment implements LoginContracts.View, 
         root = inflater.inflate(R.layout.fragment_login, container, false);
         initView(root);
 
-       /* if (AccessToken.getCurrentAccessToken() != null) {
+        if (AccessToken.getCurrentAccessToken() != null) {
             callMainActivity();
-        }*/
+        }
 
         return root;
     }
@@ -116,8 +116,8 @@ public class LoginFragment extends BaseFragment implements LoginContracts.View, 
     }
 
     @Override
-    public void showLoginError(int resStringId) {
-        Snackbar.make(root, getResources().getText(resStringId), Snackbar.LENGTH_LONG)
+    public void showLoginError(Exception exception) {
+        Snackbar.make(root, exception.getMessage(), Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show();
 
         mOnLoginFragmentListener.onErrorLoginFragmentListener();
@@ -125,8 +125,7 @@ public class LoginFragment extends BaseFragment implements LoginContracts.View, 
 
     @Override
     public void showSuccessLogin() {
-        mOnLoginFragmentListener.onHideProgress();
-        mPresenter.callMainActivity();
+        callMainActivity();
     }
 
     @Override
@@ -138,7 +137,7 @@ public class LoginFragment extends BaseFragment implements LoginContracts.View, 
 
     @Override
     public void onClick(View v) {
-        mPresenter.callMainActivity();
+        callMainActivity();
     }
 
     @Override
@@ -149,20 +148,7 @@ public class LoginFragment extends BaseFragment implements LoginContracts.View, 
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Log.v("LoginActivity", response.toString());
-
-                        // Application code
-                        try {
-                            String email = object.getString("email");
-                            String name = object.getString("name"); // 01/31/1980 format
-                            JSONObject data = response.getJSONObject();
-                            if (data.has("picture")) {
-                                String profilePicUrl = data.getJSONObject("picture").getJSONObject("data").getString("url");
-
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                        mPresenter.saveUser(object, response);
                     }
                 });
 
@@ -192,16 +178,6 @@ public class LoginFragment extends BaseFragment implements LoginContracts.View, 
      * The interface On login fragment listener.
      */
     public interface OnLoginFragmentListener {
-
-        /**
-         * On show progress.
-         */
-        void onShowProgress();
-
-        /**
-         * On hide progress.
-         */
-        void onHideProgress();
 
         /**
          * On error login fragment listener.

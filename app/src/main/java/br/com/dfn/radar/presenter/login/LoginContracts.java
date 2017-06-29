@@ -1,5 +1,9 @@
 package br.com.dfn.radar.presenter.login;
 
+import com.facebook.GraphResponse;
+
+import org.json.JSONObject;
+
 import br.com.dfn.radar.model.User;
 import br.com.dfn.radar.presenter.BasePresenter;
 
@@ -15,9 +19,9 @@ public class LoginContracts {
         /**
          * Show login error.
          *
-         * @param resStringId the res string id
+         * @param exception the exception throw
          */
-        void showLoginError(int resStringId);
+        void showLoginError(Exception exception);
 
         /**
          * Show success login.
@@ -36,22 +40,9 @@ public class LoginContracts {
      */
     public interface Presenter extends BasePresenter {
         /**
-         * Do login.
+         * save user.
          */
-        void doLogin();
-
-        /**
-         * Call main activity.
-         */
-        void callMainActivity();
-
-        /**
-         * On success get user.
-         *
-         * @param result the result
-         */
-        void onSuccessGetUser(User result);
-
+        void saveUser(JSONObject object, GraphResponse response);
     }
 }
 

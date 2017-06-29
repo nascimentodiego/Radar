@@ -36,22 +36,8 @@ public class LoginActivity extends BaseActivity implements LoginFragment.OnLogin
         }
     }
 
-
-
-
-    @Override
-    public void onShowProgress() {
-        showProgressDialog();
-    }
-
-    @Override
-    public void onHideProgress() {
-        hideProgressDialog();
-    }
-
     @Override
     public void onErrorLoginFragmentListener() {
         hideProgressDialog();
     }
-
 }
