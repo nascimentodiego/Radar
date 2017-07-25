@@ -15,11 +15,11 @@
  */
 package br.com.dfn.radar.model;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class City {
+public class City implements Serializable {
     public String name;
     public List<Weather> weather;
     public Temperature main;
-
 }

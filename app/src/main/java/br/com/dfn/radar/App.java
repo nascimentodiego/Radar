@@ -1,9 +1,3 @@
-package br.com.dfn.radar;
-
-import android.annotation.SuppressLint;
-import android.app.Application;
-import android.content.Context;
-
 /*
  * Copyright (C) 2017 Diego Figueredo do Nascimento.
  *
@@ -19,6 +13,12 @@ import android.content.Context;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package br.com.dfn.radar;
+
+import android.annotation.SuppressLint;
+import android.app.Application;
+import android.content.Context;
+
 public class App extends Application {
     @SuppressLint("StaticFieldLeak")
     private static Context mContext = null;

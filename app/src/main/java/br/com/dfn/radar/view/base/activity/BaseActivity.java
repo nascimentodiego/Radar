@@ -1,16 +1,3 @@
-package br.com.dfn.radar.view.base.activity;
-
-import android.annotation.SuppressLint;
-import android.app.ProgressDialog;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.AppCompatActivity;
-
-
-/**
- * The type Base activity.
- */
 /*
  * Copyright (C) 2017 Diego Figueredo do Nascimento.
  *
@@ -25,6 +12,19 @@ import android.support.v7.app.AppCompatActivity;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ */
+package br.com.dfn.radar.view.base.activity;
+
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.AppCompatActivity;
+
+
+/**
+ * The type Base activity.
  */
 @SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {
