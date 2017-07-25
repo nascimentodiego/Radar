@@ -22,7 +22,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class GetWeather extends GenericObservable<ResultCities> {
 
-    public GetWeather(String lat, String lon) {
+    public GetWeather(double lat, double lon) {
         setObservable(api.getWeather(lat, lon, ServiceClient.APPID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -29,13 +29,10 @@ import java.util.List;
 import br.com.dfn.radar.App;
 import br.com.dfn.radar.R;
 import br.com.dfn.radar.model.City;
-import br.com.dfn.radar.model.ResultCities;
-import br.com.dfn.radar.model.communication.api.observable.GetWeather;
 import br.com.dfn.radar.presenter.home.RadarContracts;
 import br.com.dfn.radar.presenter.home.RadarPresenter;
 import br.com.dfn.radar.util.PermissionUtil;
 import br.com.dfn.radar.view.base.fragment.BaseFragment;
-import io.reactivex.disposables.CompositeDisposable;
 
 public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
         OnSuccessListener<Location>, RadarContracts.View {
@@ -49,10 +46,6 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
     private FusedLocationProviderClient mFusedLocationClient;
     private LatLng myLastKnowLocation;
 
-
-    private CompositeDisposable mCompositeDisposable;
-    private GetWeather getWeather;
-
     /**
      * Instantiates a new Radar fragment.
      */
@@ -64,19 +57,6 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        mCompositeDisposable = new CompositeDisposable();
-
-
-        getWeather = new GetWeather("-8.1704086", "-34.9322603");
-
-        mCompositeDisposable.add(getWeather
-                .getObservable()
-                .subscribe(
-                        result -> {
-                            ResultCities resultCities = result;
-                        }
-                ));
-
     }
 
     @Override
@@ -142,8 +122,8 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
             mMapView.onDestroy();
         }
 
-        if (mCompositeDisposable != null) {
-            mCompositeDisposable.clear();
+        if (mPresenter != null) {
+            mPresenter.clearCompositeDisposable();
         }
     }
 
@@ -199,15 +179,28 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
         }
     }
 
-    public void showCities(List<City> cityList) {
+
+    @Override
+    public void showCities(List<City> cities) {
         if (mOnRadarFragmentListener != null) {
-//            mOnRadarFragmentListener.onPlacesListener(places);
+            mOnRadarFragmentListener.onPlacesListener(cities);
         }
+    }
+
+    @Override
+    public void showError(Throwable throwable) {
+
+    }
+
+    @Override
+    public void onComplete() {
+
     }
 
     /**
      * The interface On radar fragment listener.
      */
     public interface OnRadarFragmentListener {
+        void onPlacesListener(List<City> cities);
     }
 }

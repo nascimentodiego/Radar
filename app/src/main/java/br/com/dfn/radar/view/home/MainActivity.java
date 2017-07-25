@@ -1,11 +1,10 @@
 package br.com.dfn.radar.view.home;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
+import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.List;
@@ -19,6 +18,8 @@ public class MainActivity extends BaseActivity implements RadarFragment.OnRadarF
 
     private RadarFragment radarFragment;
     private ListFragment listFragment;
+
+    BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -43,10 +44,8 @@ public class MainActivity extends BaseActivity implements RadarFragment.OnRadarF
         setContentView(R.layout.activity_main);
         buildFragment(savedInstanceState);
 
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-
     }
 
     @Override
@@ -79,7 +78,6 @@ public class MainActivity extends BaseActivity implements RadarFragment.OnRadarF
                 .commit();
     }
 
-
     @Override
     protected void onPause() {
         super.onPause();
@@ -88,5 +86,12 @@ public class MainActivity extends BaseActivity implements RadarFragment.OnRadarF
     @Override
     public void onItemClick(City city) {
 
+    }
+
+    @Override
+    public void onPlacesListener(List<City> cities) {
+        listFragment.setPlaces(cities);
+        MenuItem item = navigation.getMenu().getItem(2);
+        mOnNavigationItemSelectedListener.onNavigationItemSelected(item);
     }
 }

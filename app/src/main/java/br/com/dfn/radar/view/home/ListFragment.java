@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.util.List;
+
+import br.com.dfn.radar.App;
 import br.com.dfn.radar.R;
 import br.com.dfn.radar.model.City;
 import br.com.dfn.radar.view.base.fragment.BaseFragment;
@@ -36,6 +39,12 @@ public class ListFragment extends BaseFragment {
         return root;
     }
 
+
+    public void setPlaces(List<City> placeList) {
+        adapter = new CityAdapter(App.getContext(), placeList);
+        adapter.notifyDataSetChanged();
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -57,6 +66,8 @@ public class ListFragment extends BaseFragment {
      * The interface On list fragment listener.
      */
     public interface OnListFragmentListener {
+
+
         /**
          * on item click
          */

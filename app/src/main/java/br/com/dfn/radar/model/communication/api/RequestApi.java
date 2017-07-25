@@ -23,6 +23,6 @@ import retrofit2.http.Query;
 public interface RequestApi {
 
     @GET("find?units=metric&cnt=15")
-    Observable<ResultCities> getWeather(@Query("lat") String lat, @Query("lon") String lon,
+    Observable<ResultCities> getWeather(@Query("lat") double lat, @Query("lon") double lon,
                                         @Query("APPID") String appid);
 }
