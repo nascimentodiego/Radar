@@ -3,12 +3,11 @@ package br.com.dfn.radar.view.home;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,26 +20,25 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptor;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 
 import java.util.List;
 
 import br.com.dfn.radar.App;
 import br.com.dfn.radar.R;
-import br.com.dfn.radar.model.Place;
+import br.com.dfn.radar.model.City;
+import br.com.dfn.radar.model.ResultCities;
+import br.com.dfn.radar.model.communication.api.observable.GetWeather;
 import br.com.dfn.radar.presenter.home.RadarContracts;
 import br.com.dfn.radar.presenter.home.RadarPresenter;
 import br.com.dfn.radar.util.PermissionUtil;
 import br.com.dfn.radar.view.base.fragment.BaseFragment;
+import io.reactivex.disposables.CompositeDisposable;
 
 public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
-        OnSuccessListener<Location>, GoogleMap.OnMarkerClickListener, RadarContracts.View {
+        OnSuccessListener<Location>, RadarContracts.View {
 
     private RadarContracts.Presenter mPresenter;
     private OnRadarFragmentListener mOnRadarFragmentListener;
@@ -50,6 +48,10 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
     private GoogleMap googleMap;
     private FusedLocationProviderClient mFusedLocationClient;
     private LatLng myLastKnowLocation;
+
+
+    private CompositeDisposable mCompositeDisposable;
+    private GetWeather getWeather;
 
     /**
      * Instantiates a new Radar fragment.
@@ -62,6 +64,19 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        mCompositeDisposable = new CompositeDisposable();
+
+
+        getWeather = new GetWeather("-8.1704086", "-34.9322603");
+
+        mCompositeDisposable.add(getWeather
+                .getObservable()
+                .subscribe(
+                        result -> {
+                            ResultCities resultCities = result;
+                        }
+                ));
+
     }
 
     @Override
@@ -83,6 +98,12 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
         mMapView.getMapAsync(this);
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(App.getContext());
 
+        FloatingActionButton fab = (FloatingActionButton) root.findViewById(R.id.fab);
+        fab.setOnClickListener(view -> {
+            LatLng center = googleMap.getCameraPosition().target;
+            mPresenter.doRequest(center.latitude, center.longitude);
+        });
+
         return root;
     }
 
@@ -91,45 +112,10 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
                 != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED)) {
-            googleMap.setMyLocationEnabled(false);
+            googleMap.setMyLocationEnabled(true);
             mFusedLocationClient.getLastLocation()
                     .addOnSuccessListener(getActivity(), this);
         }
-    }
-
-    private void populate(List<Place> places) {
-        if (isAdded()) {
-            for (final Place place : places) {
-                final LatLng mapCenter = new LatLng(place.getLat(), place.getLng());
-                BitmapDescriptor icon;
-
-                if (place.getType().equals(Place.TYPE_AIRPORT)) {
-                    icon = BitmapDescriptorFactory.fromBitmap(getPlaceIcon(R.drawable.place_airport));
-                } else if (place.getType().equals(Place.TYPE_NIGHT_CLUB)) {
-                    icon = BitmapDescriptorFactory.fromBitmap(getPlaceIcon(R.drawable.place_party));
-                } else if (place.getType().equals(Place.TYPE_RESTAURANT)) {
-                    icon = BitmapDescriptorFactory.fromBitmap(getPlaceIcon(R.drawable.place_restaurant));
-                } else if (place.getType().equals(Place.TYPE_SHOPPING)) {
-                    icon = BitmapDescriptorFactory.fromBitmap(getPlaceIcon(R.drawable.place_shopping));
-                } else {
-                    icon = BitmapDescriptorFactory.fromBitmap(getPlaceIcon(R.drawable.place_market));
-                }
-
-                googleMap.addMarker(new MarkerOptions()
-                        .icon(icon)
-                        .position(mapCenter)).setTag(place);
-            }
-
-
-        }
-    }
-
-    public Bitmap getPlaceIcon(int resourceId) {
-        int height = 80;
-        int width = 80;
-        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(resourceId);
-        Bitmap b = bitmapdraw.getBitmap();
-        return Bitmap.createScaledBitmap(b, width, height, false);
     }
 
     @Override
@@ -154,6 +140,10 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
         super.onDestroy();
         if (mMapView != null) {
             mMapView.onDestroy();
+        }
+
+        if (mCompositeDisposable != null) {
+            mCompositeDisposable.clear();
         }
     }
 
@@ -180,8 +170,6 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
                 getActivity(), PermissionUtil.PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)) {
             setMyLocation();
         }
-
-        googleMap.setOnMarkerClickListener(this);
     }
 
     @Override
@@ -194,10 +182,6 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
             googleMap.clear();
 
             //Add My Location
-            BitmapDescriptor icon = BitmapDescriptorFactory.fromBitmap(getPlaceIcon(R.drawable.profile_active));
-            googleMap.addMarker(new MarkerOptions()
-                    .icon(icon)
-                    .position(myLastKnowLocation));
             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLastKnowLocation, 16));
 
             CameraPosition cameraPosition = CameraPosition.builder()
@@ -210,27 +194,14 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
             googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition),
                     2000, null);
 
-            mPresenter.doRequest(lat, lng, "1000");
+            LatLng center = googleMap.getCameraPosition().target;
+            mPresenter.doRequest(center.latitude, center.longitude);
         }
     }
 
-    @Override
-    public boolean onMarkerClick(Marker marker) {
-        if (marker.getTag() instanceof Place) {
-            Place obj = (Place) marker.getTag();
-            if (mOnRadarFragmentListener != null) {
-                mOnRadarFragmentListener.onMarkerClick(obj);
-            }
-        }
-
-        return false;
-    }
-
-    @Override
-    public void showPlaces(List<Place> places) {
-        populate(places);
+    public void showCities(List<City> cityList) {
         if (mOnRadarFragmentListener != null) {
-            mOnRadarFragmentListener.onPlacesListener(places);
+//            mOnRadarFragmentListener.onPlacesListener(places);
         }
     }
 
@@ -238,11 +209,5 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
      * The interface On radar fragment listener.
      */
     public interface OnRadarFragmentListener {
-        /**
-         * On place listener
-         */
-        void onPlacesListener(List<Place> places);
-
-        void onMarkerClick(Place place);
     }
 }

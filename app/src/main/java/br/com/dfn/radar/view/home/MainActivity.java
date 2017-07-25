@@ -11,17 +11,14 @@ import android.view.MenuItem;
 import java.util.List;
 
 import br.com.dfn.radar.R;
-import br.com.dfn.radar.model.Place;
-import br.com.dfn.radar.view.base.activity.BaseOAuthActivity;
-import br.com.dfn.radar.view.home.custom.DialogPlaceInformation;
+import br.com.dfn.radar.model.City;
+import br.com.dfn.radar.view.base.activity.BaseActivity;
 
-public class MainActivity extends BaseOAuthActivity implements RadarFragment.OnRadarFragmentListener,
-        ListFragment.OnListFragmentListener, DialogPlaceInformation.DialogListener {
+public class MainActivity extends BaseActivity implements RadarFragment.OnRadarFragmentListener,
+        ListFragment.OnListFragmentListener {
 
     private RadarFragment radarFragment;
     private ListFragment listFragment;
-    private ProfileFragment profileFragment;
-    private DialogPlaceInformation dialog = new DialogPlaceInformation();
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -34,9 +31,6 @@ public class MainActivity extends BaseOAuthActivity implements RadarFragment.OnR
                     return true;
                 case R.id.navigation_list:
                     changeFragment(listFragment, ListFragment.class.getSimpleName());
-                    return true;
-                case R.id.navigation_profile:
-                    changeFragment(profileFragment, ProfileFragment.class.getSimpleName());
                     return true;
             }
             return false;
@@ -68,15 +62,10 @@ public class MainActivity extends BaseOAuthActivity implements RadarFragment.OnR
             if (listFragment == null) {
                 listFragment = new ListFragment();
             }
-            profileFragment = (ProfileFragment)
-                    fragmentManager.findFragmentByTag(ProfileFragment.class.getSimpleName());
-            if (profileFragment == null) {
-                profileFragment = new ProfileFragment();
-            }
+
         } else {
             radarFragment = new RadarFragment();
             listFragment = new ListFragment();
-            profileFragment = new ProfileFragment();
 
             fragmentManager.beginTransaction()
                     .add(R.id.container, radarFragment, RadarFragment.class.getSimpleName())
@@ -90,34 +79,14 @@ public class MainActivity extends BaseOAuthActivity implements RadarFragment.OnR
                 .commit();
     }
 
-    @Override
-    public void onPlacesListener(List<Place> places) {
-        listFragment.setPlaces(places);
-    }
-
-    @Override
-    public void onMarkerClick(Place place) {
-        dialog.setPlace(place);
-        dialog.show(getSupportFragmentManager(), DialogPlaceInformation.class.getSimpleName());
-    }
 
     @Override
     protected void onPause() {
         super.onPause();
-        /*if (dialog != null && dialog.getDialog().isShowing()) {
-            dialog.dismiss();
-        }*/
     }
 
     @Override
-    public void onItemClick(Place place) {
+    public void onItemClick(City city) {
 
-    }
-
-    @Override
-    public void onClickDialog(Place place) {
-        Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
-                Uri.parse("google.navigation:q=an" + place.getAddress()));
-        startActivity(intent);
     }
 }

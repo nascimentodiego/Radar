@@ -12,7 +12,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import br.com.dfn.radar.R;
-import br.com.dfn.radar.model.Place;
+import br.com.dfn.radar.model.City;
+import br.com.dfn.radar.model.Weather;
 
 /*
  * Copyright (C) 2017 Diego Figueredo do Nascimento.
@@ -29,22 +30,22 @@ import br.com.dfn.radar.model.Place;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-public class PlaceAdapter extends ArrayAdapter<Place> {
+public class CityAdapter extends ArrayAdapter<City> {
 
     /**
-     * Instantiates a new Products adapter.
+     * Instantiates a new city adapter.
      *
      * @param context   the context
-     * @param placeList the place list
+     * @param cityList the city list
      */
-    public PlaceAdapter(Context context, List<Place> placeList) {
-        super(context, 0, placeList);
+    public CityAdapter(Context context, List<City> cityList) {
+        super(context, 0, cityList);
     }
 
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Place obj = getItem(position);
+        City obj = getItem(position);
 
         if (convertView == null) {
             convertView = LayoutInflater.from(getContext())
@@ -52,10 +53,7 @@ public class PlaceAdapter extends ArrayAdapter<Place> {
         }
 
         TextView tx_name = (TextView) convertView.findViewById(R.id.tx_name);
-        TextView tx_address = (TextView) convertView.findViewById(R.id.tx_address);
-
-        tx_name.setText(obj.getName());
-        tx_address.setText(obj.getAddress());
+        tx_name.setText(obj.name);
 
         return convertView;
     }

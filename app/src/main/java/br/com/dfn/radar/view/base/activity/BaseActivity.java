@@ -42,16 +42,12 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         fragmentManager = getSupportFragmentManager();
         progressDialog = new ProgressDialog(this);
-//        progressDialog.setMessage(getResources().getText(R.string.loading));
     }
 
     /**
      * Build toolbar.
      */
     protected void buildToolbar() {
-       /* Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
     }
 
 

@@ -8,20 +8,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
-import java.util.List;
-
-import br.com.dfn.radar.App;
 import br.com.dfn.radar.R;
-import br.com.dfn.radar.model.Place;
+import br.com.dfn.radar.model.City;
 import br.com.dfn.radar.view.base.fragment.BaseFragment;
-import br.com.dfn.radar.view.home.adapter.PlaceAdapter;
+import br.com.dfn.radar.view.home.adapter.CityAdapter;
 
 
 public class ListFragment extends BaseFragment {
     private View root;
     private ListView lst_places;
 
-    private PlaceAdapter adapter;
+    private CityAdapter adapter;
     private OnListFragmentListener mOnListFragmentListener;
 
     @Override
@@ -37,11 +34,6 @@ public class ListFragment extends BaseFragment {
         lst_places = (ListView) root.findViewById(R.id.lst_places);
         lst_places.setAdapter(adapter);
         return root;
-    }
-
-    public void setPlaces(List<Place> placeList) {
-        adapter = new PlaceAdapter(App.getContext(), placeList);
-        adapter.notifyDataSetChanged();
     }
 
     @Override
@@ -68,7 +60,7 @@ public class ListFragment extends BaseFragment {
         /**
          * on item click
          */
-        void onItemClick(Place place);
+        void onItemClick(City city);
     }
 
 

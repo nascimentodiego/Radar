@@ -2,7 +2,7 @@ package br.com.dfn.radar.presenter.home;
 
 import java.util.List;
 
-import br.com.dfn.radar.model.Place;
+import br.com.dfn.radar.model.City;
 import br.com.dfn.radar.presenter.BasePresenter;
 
 /**
@@ -15,9 +15,9 @@ public class RadarContracts {
      */
     public interface View {
         /**
-         * Show places
+         * Show cities
          */
-        void showPlaces(List<Place> places);
+        void showCities(List<City> cities);
     }
 
     /**
@@ -30,9 +30,8 @@ public class RadarContracts {
          *
          * @param lat    the latitude
          * @param lng    the longitude
-         * @param radius the radius
          */
-        void doRequest(double lat, double lng, String radius);
+        void doRequest(double lat, double lng);
 
     }
 }
