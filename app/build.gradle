@@ -44,18 +44,19 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
 
     // depencies of project
-    compile 'com.android.support:design:25.3.1'
-    compile 'com.android.support:support-vector-drawable:25.3.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:multidex:1.0.1'
-    compile 'com.google.android.gms:play-services-maps:11.0.1'
-    compile 'com.google.android.gms:play-services-location:11.0.1'
-    compile 'io.reactivex.rxjava2:rxjava:2.1.0'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.1.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    compile 'com.android.support:support-v4:25.3.1'
+    compile "com.android.support:design:$rootProject.ext.supportVersion"
+    compile "com.android.support:support-vector-drawable:$rootProject.ext.supportVersion"
+    compile "com.android.support:support-v4:$rootProject.ext.supportVersion"
+    compile "com.google.android.gms:play-services-location:$rootProject.ext.playServicesVersion"
+    compile "com.google.android.gms:play-services-maps:$rootProject.ext.playServicesVersion"
+    compile "com.android.support.constraint:constraint-layout:$rootProject.ext.constraintLayoutVersion"
+    compile "com.android.support:multidex:$rootProject.ext.multidexVersion"
+    compile "io.reactivex.rxjava2:rxjava:$rootProject.ext.rxjava2Version"
+    compile "io.reactivex.rxjava2:rxandroid:$rootProject.ext.rxandroidVersion"
+    compile "com.squareup.retrofit2:converter-gson:$rootProject.ext.converterGsonVersion"
+    compile "com.squareup.retrofit2:retrofit:$rootProject.ext.retrofitVersion"
+    compile "com.squareup.retrofit2:adapter-rxjava2:$rootProject.ext.retrofitVersion"
+
 
     // unit tests
     testCompile "junit:junit:$rootProject.ext.junitVersion"
@@ -67,5 +68,4 @@ dependencies {
     // runners
     androidTestCompile 'com.android.support.test:runner:' + rootProject.runnerVersion;
     androidTestCompile 'com.android.support.test:rules:' + rootProject.rulesVersion;
-
 }
