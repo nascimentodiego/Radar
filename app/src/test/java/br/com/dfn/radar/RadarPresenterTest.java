@@ -34,6 +34,9 @@ import br.com.dfn.radar.model.communication.api.observable.GetWeather;
 import br.com.dfn.radar.presenter.home.RadarContracts;
 import br.com.dfn.radar.presenter.home.RadarPresenter;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.CompositeDisposable;
 
 /**
@@ -78,9 +81,12 @@ public class RadarPresenterTest {
     @Test
     public void doRequest_success() {
         // Mock the wheater.getObservable()
-        PowerMockito.when(wheater.getObservable()).thenReturn(Observable.create(subscriber -> {
-            subscriber.onNext(resultCities);
-            subscriber.onComplete();
+        PowerMockito.when(wheater.getObservable()).thenReturn(Observable.create(new ObservableOnSubscribe<ResultCities>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<ResultCities> subscriber) throws Exception {
+                subscriber.onNext(resultCities);
+                subscriber.onComplete();
+            }
         }));
 
         // call the presenter
@@ -102,10 +108,13 @@ public class RadarPresenterTest {
         final RuntimeException runtimeError = new RuntimeException();
 
         // Mock the wheater.getObservable()
-        PowerMockito.when(wheater.getObservable()).thenReturn(Observable.create(subscriber -> {
+        PowerMockito.when(wheater.getObservable()).thenReturn(Observable.create(new ObservableOnSubscribe<ResultCities>() {
+            @Override
+            public void subscribe(@NonNull ObservableEmitter<ResultCities> subscriber) throws Exception {
 
-            // throws a runtimeException
-            subscriber.onError(runtimeError);
+                // throws a runtimeException
+                subscriber.onError(runtimeError);
+            }
         }));
 
         // call the presenter
