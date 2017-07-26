@@ -25,6 +25,23 @@ public class ResultCities {
     /**
      * The List.
      */
-    public List<City> list;
+    private List<City> list;
 
+    /**
+     * Gets list.
+     *
+     * @return the list
+     */
+    public List<City> getList() {
+        return list;
+    }
+
+    /**
+     * Sets list.
+     *
+     * @param list the list
+     */
+    public void setList(List<City> list) {
+        this.list = list;
+    }
 }

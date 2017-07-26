@@ -24,5 +24,23 @@ public class Weather implements Serializable {
     /**
      * The Description.
      */
-    public String description;
+    private String description;
+
+    /**
+     * Gets description.
+     *
+     * @return the description
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
+     * Sets description.
+     *
+     * @param description the description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }

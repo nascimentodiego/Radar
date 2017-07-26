@@ -25,13 +25,67 @@ public class City implements Serializable {
     /**
      * The Name.
      */
-    public String name;
+    private String name;
     /**
      * The Weather.
      */
-    public List<Weather> weather;
+    private List<Weather> weather;
     /**
      * The Main.
      */
-    public Temperature main;
+    private Temperature main;
+
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets name.
+     *
+     * @param name the name
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    /**
+     * Gets weather.
+     *
+     * @return the weather
+     */
+    public List<Weather> getWeather() {
+        return weather;
+    }
+
+    /**
+     * Sets weather.
+     *
+     * @param weather the weather
+     */
+    public void setWeather(List<Weather> weather) {
+        this.weather = weather;
+    }
+
+    /**
+     * Gets main.
+     *
+     * @return the main
+     */
+    public Temperature getMain() {
+        return main;
+    }
+
+    /**
+     * Sets main.
+     *
+     * @param main the main
+     */
+    public void setMain(Temperature main) {
+        this.main = main;
+    }
 }

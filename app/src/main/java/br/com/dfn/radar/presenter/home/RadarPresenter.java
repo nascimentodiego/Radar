@@ -16,6 +16,9 @@
 package br.com.dfn.radar.presenter.home;
 
 
+import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
+
 import br.com.dfn.radar.model.communication.api.observable.GetWeather;
 import io.reactivex.disposables.CompositeDisposable;
 
@@ -35,16 +38,33 @@ public class RadarPresenter implements RadarContracts.Presenter {
      */
     public RadarPresenter(RadarContracts.View mRadarView) {
         this.mRadarView = mRadarView;
+        this.getWeather = new GetWeather();
         this.mCompositeDisposable = new CompositeDisposable();
+    }
+
+    /**
+     * Instantiates a new Radar presenter.
+     *
+     * @param radarView           the radar view
+     * @param wheater             the wheater
+     * @param compositeDisposable the composite disposable
+     */
+    @VisibleForTesting
+    public RadarPresenter(@NonNull RadarContracts.View radarView,
+                          @NonNull GetWeather wheater,
+                          @NonNull CompositeDisposable compositeDisposable) {
+        this.mRadarView = radarView;
+        this.getWeather = wheater;
+        this.mCompositeDisposable = compositeDisposable;
     }
 
     @Override
     public void doRequest(double lat, double lng) {
-        getWeather = new GetWeather(lat, lng);
+        getWeather.prepareRequest(lat, lng);
         this.mCompositeDisposable.add(
                 getWeather.getObservable()
                         .subscribe(
-                                resultCities -> mRadarView.showCities(resultCities.list),
+                                resultCities -> mRadarView.showCities(resultCities.getList()),
                                 throwable -> mRadarView.showError(throwable),
                                 () -> mRadarView.onComplete())
         );

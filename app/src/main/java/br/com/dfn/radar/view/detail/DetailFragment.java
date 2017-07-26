@@ -66,16 +66,16 @@ public class DetailFragment extends BaseFragment {
         txtWeather = (TextView) root.findViewById(R.id.txtWeather);
 
         if (null != city) {
-            txtName.setText(city.name);
+            txtName.setText(city.getName());
             String minTemperature = getString(R.string.label_min_temperature,
-                    String.valueOf(city.main.temp_min));
-            String maxTemperature = getString(R.string.label_min_temperature,
-                    String.valueOf(city.main.temp_min));
+                    String.valueOf(city.getMain().getTempMin()));
+            String maxTemperature = getString(R.string.label_max_temperature,
+                    String.valueOf(city.getMain().getTempMax()));
             txtTemperatureMin.setText(minTemperature);
             txtTemperatureMax.setText(maxTemperature);
-            if (city.weather != null && !city.weather.isEmpty()) {
+            if (city.getWeather() != null && !city.getWeather().isEmpty()) {
                 String weather = getString(R.string.label_wethear,
-                        city.weather.get(INDEX).description);
+                        city.getWeather().get(INDEX).getDescription());
                 txtWeather.setText(weather);
             }
         }

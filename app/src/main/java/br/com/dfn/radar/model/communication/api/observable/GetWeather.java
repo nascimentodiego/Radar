@@ -27,11 +27,18 @@ public class GetWeather extends GenericObservable<ResultCities> {
 
     /**
      * Instantiates a new Get weather.
+     */
+    public GetWeather() {
+
+    }
+
+    /**
+     * Prepare request.
      *
      * @param lat the lat
      * @param lon the lon
      */
-    public GetWeather(double lat, double lon) {
+    public void prepareRequest(double lat, double lon) {
         setObservable(api.getWeather(lat, lon, ServiceClient.APPID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread()).cache());

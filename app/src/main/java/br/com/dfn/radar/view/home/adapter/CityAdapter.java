@@ -54,7 +54,7 @@ public class CityAdapter extends ArrayAdapter<City> {
         }
 
         TextView tx_name = (TextView) convertView.findViewById(R.id.tx_name);
-        tx_name.setText(obj.name);
+        tx_name.setText(obj.getName());
 
         return convertView;
     }
