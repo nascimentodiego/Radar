@@ -20,8 +20,19 @@ import io.reactivex.Observable;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
 
+/**
+ * The interface Request api.
+ */
 public interface RequestApi {
 
+    /**
+     * Gets weather.
+     *
+     * @param lat   the lat
+     * @param lon   the lon
+     * @param appid the appid
+     * @return the weather
+     */
     @GET("find?units=metric&cnt=15")
     Observable<ResultCities> getWeather(@Query("lat") double lat, @Query("lon") double lon,
                                         @Query("APPID") String appid);

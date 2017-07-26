@@ -26,7 +26,14 @@ import br.com.dfn.radar.R;
 import br.com.dfn.radar.model.City;
 import br.com.dfn.radar.view.base.fragment.BaseFragment;
 
+/**
+ * The type Detail fragment.
+ */
 public class DetailFragment extends BaseFragment {
+    /**
+     * The constant INDEX.
+     */
+    public static final int INDEX = 0;
     private View root;
     private TextView txtName, txtTemperatureMin, txtTemperatureMax, txtWeather;
 
@@ -60,10 +67,16 @@ public class DetailFragment extends BaseFragment {
 
         if (null != city) {
             txtName.setText(city.name);
-            txtTemperatureMin.setText("Min:" + city.main.temp_min);
-            txtTemperatureMax.setText("Max:" + city.main.temp_max);
+            String minTemperature = getString(R.string.label_min_temperature,
+                    String.valueOf(city.main.temp_min));
+            String maxTemperature = getString(R.string.label_min_temperature,
+                    String.valueOf(city.main.temp_min));
+            txtTemperatureMin.setText(minTemperature);
+            txtTemperatureMax.setText(maxTemperature);
             if (city.weather != null && !city.weather.isEmpty()) {
-                txtWeather.setText("Weather:" + city.weather.get(0).description);
+                String weather = getString(R.string.label_wethear,
+                        city.weather.get(INDEX).description);
+                txtWeather.setText(weather);
             }
         }
 

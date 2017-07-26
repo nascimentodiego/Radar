@@ -1,0 +1,12 @@
+br.com.dfn.radar
+br.com.dfn.radar.model
+br.com.dfn.radar.model.communication.api
+br.com.dfn.radar.model.communication.api.observable
+br.com.dfn.radar.presenter
+br.com.dfn.radar.presenter.home
+br.com.dfn.radar.util
+br.com.dfn.radar.view.base.activity
+br.com.dfn.radar.view.base.fragment
+br.com.dfn.radar.view.detail
+br.com.dfn.radar.view.home
+br.com.dfn.radar.view.home.adapter

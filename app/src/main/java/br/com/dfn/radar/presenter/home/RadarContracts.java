@@ -31,11 +31,15 @@ public class RadarContracts {
     public interface View {
         /**
          * Show cities
+         *
+         * @param cities the cities
          */
         void showCities(List<City> cities);
 
         /**
          * Show any error can happens
+         *
+         * @param throwable the throwable
          */
         void showError(Throwable throwable);
 

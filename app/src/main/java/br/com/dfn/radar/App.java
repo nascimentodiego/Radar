@@ -19,6 +19,9 @@ import android.annotation.SuppressLint;
 import android.app.Application;
 import android.content.Context;
 
+/**
+ * The type App.
+ */
 public class App extends Application {
     @SuppressLint("StaticFieldLeak")
     private static Context mContext = null;

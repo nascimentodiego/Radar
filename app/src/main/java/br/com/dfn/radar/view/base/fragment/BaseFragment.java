@@ -1,10 +1,3 @@
-package br.com.dfn.radar.view.base.fragment;
-
-import android.support.v4.app.Fragment;
-
-/**
- * The type Base fragment.
- */
 /*
  * Copyright (C) 2017 Diego Figueredo do Nascimento.
  *
@@ -19,6 +12,13 @@ import android.support.v4.app.Fragment;
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ */
+package br.com.dfn.radar.view.base.fragment;
+
+import android.support.v4.app.Fragment;
+
+/**
+ * The type Base fragment.
  */
 public class BaseFragment extends Fragment {
 

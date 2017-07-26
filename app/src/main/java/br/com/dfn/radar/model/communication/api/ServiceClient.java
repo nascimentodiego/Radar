@@ -19,9 +19,18 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+/**
+ * The type Service client.
+ */
 public class ServiceClient {
 
+    /**
+     * The Base url request. This url is http://api.openweathermap.org/data/2.5/
+     */
     private static final String BASE_URL = "http://api.openweathermap.org/data/2.5/";
+    /**
+     * The App Id register on site openweathermap. eg: eca2752472a11f5f27d913c0a2c86302
+     */
     public static final String APPID = "eca2752472a11f5f27d913c0a2c86302";
 
     private static Retrofit builderStarWars =
@@ -31,6 +40,11 @@ public class ServiceClient {
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                     .build();
 
+    /**
+     * Gets builder retrofit.
+     *
+     * @return the builder retrofit
+     */
     public static Retrofit getBuilderRetrofit() {
         return builderStarWars;
     }

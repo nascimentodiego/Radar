@@ -20,11 +20,24 @@ import android.content.pm.PackageManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 
+/**
+ * The type Permission util.
+ */
 public class PermissionUtil {
+    /**
+     * The constant PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION.
+     */
     public static final int PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2;
 
+    /**
+     * Has permission boolean.
+     *
+     * @param permission  the permission
+     * @param activity    the activity
+     * @param requestCode the request code
+     * @return the boolean
+     */
     public static boolean hasPermission(String[] permission, FragmentActivity activity, int requestCode) {
         boolean result = true;
         // Here, thisActivity is the current activity

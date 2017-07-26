@@ -20,13 +20,21 @@ import br.com.dfn.radar.model.communication.api.ServiceClient;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
+/**
+ * The type Get weather.
+ */
 public class GetWeather extends GenericObservable<ResultCities> {
 
+    /**
+     * Instantiates a new Get weather.
+     *
+     * @param lat the lat
+     * @param lon the lon
+     */
     public GetWeather(double lat, double lon) {
         setObservable(api.getWeather(lat, lon, ServiceClient.APPID)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .cache());
+                .observeOn(AndroidSchedulers.mainThread()).cache());
     }
 
 }

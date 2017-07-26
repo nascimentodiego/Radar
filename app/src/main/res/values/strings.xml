@@ -1,9 +1,11 @@
 <resources>
     <string name="app_name">Radar</string>
     <string name="title_radar">Radar</string>
-    <string name="title_list">Lista</string>
-    <string name="title_profile">Perfil</string>
+    <string name="title_list">List</string>
 
-    <string name="facebook_app_id">315245708918459</string>
-    <string name="fb_login_protocol_scheme">fb315245708918459</string>
+    <string name="error_connection">No have a connection with the internet!</string>
+    <string name="label_min_temperature">Temperature Min: %1$s</string>
+    <string name="label_max_temperature">Temperature Max: %1$s</string>
+    <string name="label_wethear">Wethear: %1$s</string>
+
 </resources>

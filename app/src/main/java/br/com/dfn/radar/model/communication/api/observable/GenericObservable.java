@@ -19,19 +19,43 @@ import br.com.dfn.radar.model.communication.api.RequestApi;
 import br.com.dfn.radar.model.communication.api.ServiceClient;
 import io.reactivex.Observable;
 
+/**
+ * The type Generic observable.
+ *
+ * @param <T> the type parameter
+ */
 public abstract class GenericObservable<T> {
 
+    /**
+     * The Api.
+     */
     protected RequestApi api;
+    /**
+     * The Observable.
+     */
     protected Observable<T> observable;
 
+    /**
+     * Instantiates a new Generic observable.
+     */
     public GenericObservable() {
         this.api = ServiceClient.getBuilderRetrofit().create(RequestApi.class);
     }
 
+    /**
+     * Gets observable.
+     *
+     * @return the observable
+     */
     public Observable<T> getObservable() {
         return this.observable;
     }
 
+    /**
+     * Sets observable.
+     *
+     * @param observable the observable
+     */
     public void setObservable(Observable<T> observable) {
         this.observable = observable;
     }

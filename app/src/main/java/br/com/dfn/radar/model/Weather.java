@@ -17,6 +17,12 @@ package br.com.dfn.radar.model;
 
 import java.io.Serializable;
 
+/**
+ * The type Weather.
+ */
 public class Weather implements Serializable {
+    /**
+     * The Description.
+     */
     public String description;
 }

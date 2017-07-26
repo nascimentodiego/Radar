@@ -18,8 +18,20 @@ package br.com.dfn.radar.model;
 import java.io.Serializable;
 import java.util.List;
 
+/**
+ * The type City.
+ */
 public class City implements Serializable {
+    /**
+     * The Name.
+     */
     public String name;
+    /**
+     * The Weather.
+     */
     public List<Weather> weather;
+    /**
+     * The Main.
+     */
     public Temperature main;
 }

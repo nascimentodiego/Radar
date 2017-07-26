@@ -21,6 +21,9 @@ import br.com.dfn.radar.R;
 import br.com.dfn.radar.view.base.activity.BaseActivity;
 import br.com.dfn.radar.view.home.RadarFragment;
 
+/**
+ * The type Detail activity.
+ */
 public class DetailActivity extends BaseActivity {
 
     private DetailFragment detailFragment;

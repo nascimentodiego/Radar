@@ -17,8 +17,14 @@ package br.com.dfn.radar.model;
 
 import java.util.List;
 
+/**
+ * The type Result cities.
+ */
 public class ResultCities {
 
+    /**
+     * The List.
+     */
     public List<City> list;
 
 }

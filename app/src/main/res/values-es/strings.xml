@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Radar del Clima</string>
+    <string name="title_radar">Radar</string>
+    <string name="title_list">Lista</string>
+
+    <string name="error_connection">Usted no tiene conexión a Internet!</string>
+    <string name="label_min_temperature">Temperatura Min: %1$s</string>
+    <string name="label_max_temperature">Temperatura Max: %1$s</string>
+    <string name="label_wethear">Clima: %1$s</string>
+</resources>

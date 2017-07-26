@@ -29,12 +29,18 @@ import br.com.dfn.radar.model.City;
 import br.com.dfn.radar.view.base.activity.BaseActivity;
 import br.com.dfn.radar.view.detail.DetailActivity;
 
+/**
+ * The type Main activity.
+ */
 public class MainActivity extends BaseActivity implements RadarFragment.OnRadarFragmentListener,
         ListFragment.OnListFragmentListener {
 
     private RadarFragment radarFragment;
     private ListFragment listFragment;
 
+    /**
+     * The Navigation.
+     */
     BottomNavigationView navigation;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener

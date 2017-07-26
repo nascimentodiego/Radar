@@ -19,9 +19,12 @@ package br.com.dfn.radar.presenter.home;
 import br.com.dfn.radar.model.communication.api.observable.GetWeather;
 import io.reactivex.disposables.CompositeDisposable;
 
+/**
+ * The type Radar presenter.
+ */
 public class RadarPresenter implements RadarContracts.Presenter {
 
-    private final RadarContracts.View mRadarView;
+    private RadarContracts.View mRadarView;
     private CompositeDisposable mCompositeDisposable;
     private GetWeather getWeather;
 

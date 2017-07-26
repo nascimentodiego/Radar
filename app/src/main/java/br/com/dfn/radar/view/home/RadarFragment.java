@@ -24,6 +24,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,6 +51,9 @@ import br.com.dfn.radar.presenter.home.RadarPresenter;
 import br.com.dfn.radar.util.PermissionUtil;
 import br.com.dfn.radar.view.base.fragment.BaseFragment;
 
+/**
+ * The type Radar fragment.
+ */
 public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
         OnSuccessListener<Location>, RadarContracts.View {
 
@@ -205,7 +209,11 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
 
     @Override
     public void showError(Throwable throwable) {
-        Toast.makeText(App.getContext(), throwable.getMessage(), Toast.LENGTH_LONG).show();
+        Log.d(RadarFragment.class.getSimpleName(), throwable.getMessage());
+
+        if (throwable instanceof java.net.UnknownHostException) {
+            Toast.makeText(App.getContext(), getString(R.string.error_connection), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
@@ -217,6 +225,11 @@ public class RadarFragment extends BaseFragment implements OnMapReadyCallback,
      * The interface On radar fragment listener.
      */
     public interface OnRadarFragmentListener {
+        /**
+         * On places listener.
+         *
+         * @param cities the cities
+         */
         void onPlacesListener(List<City> cities);
     }
 }

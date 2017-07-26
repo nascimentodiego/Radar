@@ -23,19 +23,20 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-
 import java.util.List;
 
 import br.com.dfn.radar.R;
 import br.com.dfn.radar.model.City;
-import br.com.dfn.radar.model.Weather;
 
+/**
+ * The type City adapter.
+ */
 public class CityAdapter extends ArrayAdapter<City> {
 
     /**
      * Instantiates a new city adapter.
      *
-     * @param context   the context
+     * @param context  the context
      * @param cityList the city list
      */
     public CityAdapter(Context context, List<City> cityList) {

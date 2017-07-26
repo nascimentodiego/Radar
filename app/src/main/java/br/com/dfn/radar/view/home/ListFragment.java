@@ -33,6 +33,9 @@ import br.com.dfn.radar.view.base.fragment.BaseFragment;
 import br.com.dfn.radar.view.home.adapter.CityAdapter;
 
 
+/**
+ * The type List fragment.
+ */
 public class ListFragment extends BaseFragment implements AdapterView.OnItemClickListener {
     private View root;
     private ListView lst_places;
@@ -57,6 +60,11 @@ public class ListFragment extends BaseFragment implements AdapterView.OnItemClic
     }
 
 
+    /**
+     * Sets places.
+     *
+     * @param placeList the place list
+     */
     public void setPlaces(List<City> placeList) {
         adapter = new CityAdapter(App.getContext(), placeList);
         adapter.notifyDataSetChanged();
@@ -92,6 +100,8 @@ public class ListFragment extends BaseFragment implements AdapterView.OnItemClic
 
         /**
          * on item click
+         *
+         * @param city the city
          */
         void onItemClick(City city);
     }
