@@ -15,21 +15,29 @@
  */
 package br.com.dfn.radar.model.communication.api.observable;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.VisibleForTesting;
+
 import br.com.dfn.radar.model.ResultCities;
 import br.com.dfn.radar.model.communication.api.ServiceClient;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
 
 /**
  * The type Get weather.
  */
 public class GetWeather extends GenericObservable<ResultCities> {
 
+    private SchedulerContracts schedulerContracts;
+
     /**
      * Instantiates a new Get weather.
      */
     public GetWeather() {
+        this.schedulerContracts = new SchedulerProvider();
+    }
 
+    @VisibleForTesting
+    public GetWeather(@NonNull SchedulerContracts schedulerContracts) {
+        this.schedulerContracts = schedulerContracts;
     }
 
     /**
@@ -40,8 +48,8 @@ public class GetWeather extends GenericObservable<ResultCities> {
      */
     public void prepareRequest(double lat, double lon) {
         setObservable(api.getWeather(lat, lon, ServiceClient.APPID)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread()).cache());
+                .subscribeOn(schedulerContracts.io())
+                .observeOn(schedulerContracts.mainThread()).cache());
     }
 
 }

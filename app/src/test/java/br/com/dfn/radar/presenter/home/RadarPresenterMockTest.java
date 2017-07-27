@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package br.com.dfn.radar;
+package br.com.dfn.radar.presenter.home;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -44,7 +44,7 @@ import io.reactivex.disposables.CompositeDisposable;
  */
 @RunWith(PowerMockRunner.class)
 @PrepareForTest({CompositeDisposable.class})
-public class RadarPresenterTest {
+public class RadarPresenterMockTest {
 
     @Mock
     private RadarContracts.View radarView;
